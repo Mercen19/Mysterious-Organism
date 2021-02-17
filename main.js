@@ -25,15 +25,29 @@ const pAequorFactory = (specimenNum, dna) => {
       }
       this.dna[randIndex] = newBase;
       return this.dna;
+    },
+    compareDNA(otherOrg) {
+      const similarities = this.dna.reduce((acc, curr, idx, arr) => {
+        if (arr[idx] === otherOrg.dna[idx]) {
+          return acc + 1;
+        } else {
+          return acc;
+        }
+      }, 0);
+      const percentOfDNAshared = (similarities / this.dna.length) * 100;
+      const percentageTo2Deci = percentOfDNAshared.toFixed(2);
+      console.log(`${this.specimenNum} and ${otherOrg.specimenNum} have ${percentageTo2Deci}% DNA in common.`);
     }
   }
 };
 
 //Test cases
 const pAequor = pAequorFactory(1, mockUpStrand());
+const pAequor2 = pAequorFactory(2, mockUpStrand());
 console.log(pAequor);
-pAequor.mutate();
-console.log(pAequor.dna);
-
+//pAequor.mutate();
+//console.log(pAequor.dna);
+console.log(pAequor2);
+pAequor.compareDNA(pAequor2);
 
 
