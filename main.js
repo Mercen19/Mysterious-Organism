@@ -41,6 +41,28 @@ const pAequorFactory = (specimenNum, dna) => {
     willLikelySurvive() {
       const cOrG = this.dna.filter(el => el === 'C' || el === 'G');
       return cOrG.length / this.dna.length >= 0.6;
+    },
+    complementStrand() {
+      let compStrand = [];
+      for (let i = 0; i < this.dna.length; i++) {
+        switch (this.dna[i]) {
+          case 'A':
+            compStrand.push('T');
+            break;
+          case 'T':
+            compStrand.push('A');
+            break;
+          case 'C':
+            compStrand.push('G');
+            break;
+          case 'G':
+            compStrand.push('C');
+            break;
+          default:
+            break;
+        }
+      }
+      return compStrand;
     }
   }
 };
@@ -59,12 +81,13 @@ while (survivingSpecimen.length < 30) {
 console.log(survivingSpecimen);
 
 //Test cases
-//const pAequor = pAequorFactory(1, mockUpStrand());
+const pAequor = pAequorFactory(1, mockUpStrand());
 //const pAequor2 = pAequorFactory(2, mockUpStrand());
-//console.log(pAequor);
+console.log(pAequor);
 //pAequor.mutate();
 //console.log(pAequor.dna);
 //console.log(pAequor2);
 //pAequor.compareDNA(pAequor2);
 //console.log(pAequor.willLikelySurvive());
+console.log(pAequor.complementStrand());
 
